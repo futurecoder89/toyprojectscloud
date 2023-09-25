@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="g">
+	<select id="gp_list" resultType="vo.GpVO">
+       select * from SHOPPING order by pid DESC
+   </select>
+   
+   <select id="gp_feedlist" resultType="vo.GpVO">
+       select * from SHOPPING where category = 'feed'
+   </select>
+   
+   <select id="gp_leashlist" resultType="vo.GpVO">
+       select * from SHOPPING where category = 'leash'
+   </select>
+   
+   <select id="gp_padlist" resultType="vo.GpVO">
+       select * from SHOPPING where category = 'pad'
+   </select>
+   
+   <select id="gp_clothlist" resultType="vo.GpVO">
+       select * from SHOPPING where category = 'cloth'
+   </select>
+   
+   
+   <!-- 새상품 추가 -->
+   <insert id="gp_addproduct" parameterType="vo.GpVO">
+       insert into SHOPPING values( 
+          pid_seq.nextval, 
+          #{productname}, 
+          #{species}, 
+          #{category}, 
+          #{price},
+          #{productdetail},
+          #{filename}, 
+          sysdate, 
+          #{popularity} )
+   </insert>
+   
+   <!-- 글 삭제 -->
+   <delete id="gp_delete" parameterType="int">
+      delete from SHOPPING where pid=#{pid}
+   </delete>
+   
+   <select id="gp_delete_filename" parameterType="int" resultType="vo.GpVO">
+      select filename from SHOPPING where pid=#{pid}
+   </select>
+   
+   <!-- 글 수정 -->
+   <update id="gp_modify" parameterType="vo.GpVO">
+      update SHOPPING set productname=#{productname},
+      species=#{species},
+      category=#{category},
+      price=#{price},
+      productdetail=#{productdetail},
+      filename=#{filename},
+      regdate=sysdate,
+      popularity=#{popularity}
+      where pid=#{pid}
+   </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
