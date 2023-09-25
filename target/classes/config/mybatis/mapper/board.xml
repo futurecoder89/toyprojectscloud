@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="t">
+	
+	<!--장바구니 목록 보기  -->
+	<select id="toy_list" resultType="vo.ToyVO">
+       select * from CART order by id DESC
+   </select>
+	
+	<!--장바구니 상품 담기  -->
+	<insert id="toy_addtocart" parameterType="vo.ToyVO">
+       insert into CART values( 
+          id_seq.nextval, 
+          #{name}, 
+          #{price},
+          #{quantity},
+          #{productId}
+           
+            )
+   </insert>
+	
+	
+	<!--장바구니 상품 삭제  -->
+	<delete id="toy_delete" parameterType="int">
+      delete from CART where id=#{id}
+   </delete>
+	
+	<!--주문하기  -->
+	<insert id="toy_orderproduct" parameterType="vo.ToyVO">
+       insert into ORDERLIST values( 
+          id_seq.nextval, 
+          #{name}, 
+          #{price},
+          #{quantity},
+          #{productId}
+           
+            )
+   </insert>
+	
+	
+	<!--주문 목록 보기  -->
+	<select id="toy_orderlist" resultType="vo.ToyVO">
+       select * from ORDERLIST order by id DESC
+   </select>
+</mapper>
+
+
+

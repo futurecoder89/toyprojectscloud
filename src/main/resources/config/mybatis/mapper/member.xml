@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="m">
+	<select id="member_list" resultType="member">
+		select * from MEMBER1 order by idx DESC
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insert_user" parameterType="member">
+		insert into MEMBER1 values(
+			seq_member1.nextVal, 
+			#{id},
+			#{nickname}, 
+			#{pwd}, 
+			#{addr})
+	</insert>
+	
+	<select id="selectOne" parameterType="int" resultType="member">
+		select * from MEMBER1 where idx=#{idx}
+	</select>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="check_id" resultType="member" parameterType="String">
+		select * from member1 where id=#{id}
+	</select>
+	<!-- 닉네임 중복체크 --> <!-- select 만 resultType이있다. -->
+	<select id="check_nickname" resultType="member" parameterType="String">
+		select * from member1 where nickname=#{nickname}
+	</select>	
+	<!-- 회원삭제 -->
+	<delete id="delMember" parameterType="int">
+		delete from MEMBER1 where idx=#{idx}
+	</delete>
+	<update id="member_update" parameterType="member">
+		update MEMBER1 
+		set 
+		id =#{id},
+		nickname=#{nickname},
+		pwd=#{pwd},
+		addr=#{addr}
+		where idx=#{idx} 
+	</update>
+	<!-- 로그인을 위한 id체크 -->
+	<select id="login_id" parameterType="String" resultType="member">
+		select * from MEMBER1 where id=#{id} 
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--  쇼핑몰 -->
+	
+
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
